@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Update this variable to point to your Ipe AppImage download.
+IPE_APPIMAGE_PATH="~/Downloads/ipe-7.2.7-x86_64.AppImage"
+
+# Apply realpath to arguments that do not start with hyphen,
+# since ipe-app has to change directory before starting Ipe.
+args=( "$@" )
+for i in "${!args[@]}"; do
+	case "${args[$i]}" in
+		'-*')
+			# echo "arg ${args[$i]}"
+			;;
+		*)
+			# echo "file ${args[$i]}"
+			args[$i]="`realpath -m "${args[$i]}"`"
+			# echo "${args[$i]}"
+	esac
+done
+
+"$IPE_APPIMAGE_PATH" "`basename $0`" "${args[@]}"
