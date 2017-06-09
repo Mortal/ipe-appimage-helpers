@@ -8,7 +8,7 @@ IPE_APPIMAGE_PATH="~/Downloads/ipe-7.2.7-x86_64.AppImage"
 args=( "$@" )
 for i in "${!args[@]}"; do
 	case "${args[$i]}" in
-		'-*')
+		-*)
 			# echo "arg ${args[$i]}"
 			;;
 		*)
