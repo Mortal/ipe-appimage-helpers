@@ -23,4 +23,6 @@ for i in "${!args[@]}"; do
 	esac
 done
 
+printf '\033]0;%s\007' Ipe
+
 exec "$IPE_APPIMAGE_PATH" "`basename $0`" "${args[@]}"
