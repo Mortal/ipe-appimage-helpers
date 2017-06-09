@@ -13,13 +13,20 @@ fi
 args=( "$@" )
 for i in "${!args[@]}"; do
 	case "${args[$i]}" in
+		-page|-view|-resolution)
+			skipnext=1
+			;;
 		-*)
+			skipnext=
 			# echo "arg ${args[$i]}"
 			;;
 		*)
 			# echo "file ${args[$i]}"
-			args[$i]="`realpath -m "${args[$i]}"`"
+			if [ -z "$skipnext" ]; then
+				args[$i]="`realpath -m "${args[$i]}"`"
+			fi
 			# echo "${args[$i]}"
+			skipnext=
 	esac
 done
 
