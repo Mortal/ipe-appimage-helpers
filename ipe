@@ -2,6 +2,7 @@
 
 # Update this variable to point to your Ipe AppImage download.
 IPE_APPIMAGE_PATH="$HOME/Downloads/software/ipe-7.2.7-x86_64.AppImage"
+IPE_WINDOW_TITLE=Ipe
 
 if ! [ -e "$IPE_APPIMAGE_PATH" ]; then
 	curl -Lo "$IPE_APPIMAGE_PATH" "https://dl.bintray.com/otfried/generic/ipe/7.2/`basename "$IPE_APPIMAGE_PATH"`"
@@ -30,6 +31,9 @@ for i in "${!args[@]}"; do
 	esac
 done
 
-printf '\033]0;%s\007' Ipe
+printf '\033]0;%s\007' "$IPE_WINDOW_TITLE"
+
+# Export IPE_WINDOW_TITLE to allow $EDITOR to restore the window title
+export IPE_WINDOW_TITLE
 
 exec "$IPE_APPIMAGE_PATH" "`basename $0`" "${args[@]}"
